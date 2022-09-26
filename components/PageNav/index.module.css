@@ -1,0 +1,38 @@
+.container {
+  height: 55px;
+  background-color: #333;
+  color: #d7d7d7;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inner {
+  max-width: 1460px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+.title {
+  color: #fff;
+  padding-left: 10px;
+  margin-right: 40px;
+}
+.navList {
+  flex: 1;
+}
+
+.navItem {
+  line-height: 30px;
+  text-align: center;
+  min-width: 100px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+.navItem:hover {
+  background-color: #f0f0f0;
+  color: #666;
+}
