@@ -1,5 +1,6 @@
 .mainContainer {
   max-width: 1460px;
+  width: 80%;
   margin: 40px auto;
   display: flex;
 }

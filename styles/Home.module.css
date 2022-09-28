@@ -6,14 +6,23 @@
 .articleItem:last-of-type {
   margin-bottom: 0;
 }
-
-.articleThumb {
+.articleThumbWrapper {
   width: 200px;
   height: 120px;
-  object-fit: cover;
   margin-right: 10px;
   border-radius: 10px;
   flex: 0 0 200px;
+  overflow: hidden;
+}
+
+.articleThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 200ms;
+}
+.articleThumb:hover {
+  transform: scale(1.3);
 }
 .articleInfo {
   flex: 1;
@@ -60,4 +69,14 @@
 }
 .categoryItem:last-of-type {
   margin-right: 0;
+}
+.read {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+.iconArrowRight {
+  margin-left: 2px;
 }
