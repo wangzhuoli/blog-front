@@ -1,5 +1,6 @@
 .aboutContainer {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .avatar {
@@ -74,6 +75,7 @@
   position: relative;
 }
 .iconWeixin:hover .qrcodeContainer {
+  z-index: 2;
   opacity: 1;
 }
 .iconGithub {
@@ -97,6 +99,7 @@
   border-radius: 4px;
   opacity: 0;
   transition: opacity 400ms;
+  z-index: -1;
 }
 .qrcodeContainer:after {
   content: '';

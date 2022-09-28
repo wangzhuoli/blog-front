@@ -34,7 +34,7 @@ const About: React.FC<{ className?: string }> = (props) => {
         <span
           className={`iconfont icon-favorites-fill ${styles.iconFavorites}`}
         />
-        关注
+        收藏
       </a>
       <div className={styles.other}>
         <div className={`iconfont icon-wechat- ${styles.iconWeixin}`}>

@@ -15,3 +15,20 @@ export const serviceRequest = async (
     data: null,
   };
 };
+
+/**
+ * 客户端请求
+ * **/
+export const clientRequest = async (
+  url: string,
+  options?: RequestInit,
+): Promise<any> => {
+  try {
+    const result = await fetch(baseUrl + url, options);
+    return await result.json();
+  } catch (e) {
+    return {
+      data: null,
+    };
+  }
+};

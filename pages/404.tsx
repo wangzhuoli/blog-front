@@ -1,5 +1,12 @@
+import NextHead from '../components/NextHead';
+
 const NotFountPage = () => {
-  return <div>404</div>;
+  return (
+    <>
+      <NextHead />
+      <div>404</div>
+    </>
+  );
 };
 
 export default NotFountPage;

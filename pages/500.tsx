@@ -1,5 +1,12 @@
+import NextHead from '../components/NextHead';
+
 const ServerErrorPage = () => {
-  return <div>500</div>;
+  return (
+    <>
+      <NextHead />
+      <div>500</div>
+    </>
+  );
 };
 
 export default ServerErrorPage;
