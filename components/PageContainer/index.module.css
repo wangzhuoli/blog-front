@@ -1,0 +1,12 @@
+.mainContainer {
+  max-width: 1460px;
+  margin: 40px auto;
+  display: flex;
+}
+.leftContent {
+  flex: 1;
+  margin-right: 20px;
+}
+.rightContent {
+  flex: 0 0 400px;
+}
