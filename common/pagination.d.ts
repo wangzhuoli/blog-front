@@ -10,7 +10,7 @@ export interface TableListPagination {
 export interface PaginationResult<T> extends TableListPagination {
   list: T[];
   total: number;
-  current: number;
+  currentPage: number;
   pageSize: number;
   totalPage: number;
 }

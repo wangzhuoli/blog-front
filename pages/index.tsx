@@ -5,11 +5,15 @@ import Card from '../components/Card';
 import { getArticleList } from '../services/article/index';
 import { PaginationResult } from '../common/pagination';
 import { ArticleItem } from '../services/article/index.d';
-import {GetServerSideProps} from "next";
+import { GetServerSideProps } from 'next';
+import Pagination from '../components/Pagination';
+import Result from '../components/Result';
+import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 
-export const  getServerSideProps: GetServerSideProps =async ( context) => {
-  const {page = 1} = context.query
-  const { data } = await getArticleList({pageSize: 10, current: +page});
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { page = 1 } = context.query;
+  const { data } = await getArticleList({ pageSize: 10, current: +page });
   if (!data) {
     return {
       redirect: {
@@ -27,42 +31,72 @@ export const  getServerSideProps: GetServerSideProps =async ( context) => {
       ...data,
     },
   };
-}
+};
 
 const HomePage: NextPage<PaginationResult<ArticleItem>> = (props) => {
-  const { total, totalPage, list, current } = props;
+  const { total, totalPage, list, currentPage = 1 } = props;
+  const router = useRouter();
+  const onPageChange = useCallback((page: number) => {
+    router.replace('/', { query: { page } });
+  }, []);
   return (
     <PageContainer>
-      <div className={styles.articleList}>
-        {list.map((article) => (
-          <Card key={article.id} className={styles.articleItem}>
-            <div className={styles.articleThumbWrapper}>
-              <img src={article.thumbUrl} className={styles.articleThumb} />
-            </div>
-            <div className={styles.articleInfo}>
-              <a href={`/article/${article.id}`} className={`${styles.articleTitle} ellipsis`}>
-                {article.title}
-              </a>
-              <div className={`${styles.articleIntro} ellipsis`}>
-                {article.intro}
+      {list.length === 0 ? (
+        <Card>
+          <Result
+            title={'暂无数据'}
+            icon={'icon-empty'}
+            color={'#ccc'}
+            className={styles.empty}
+          />
+        </Card>
+      ) : (
+        <div className={styles.articleList}>
+          {list.map((article) => (
+            <Card key={article.id} className={styles.articleItem}>
+              <div className={styles.articleThumbWrapper}>
+                <img src={article.thumbUrl} className={styles.articleThumb} />
               </div>
-              <div className={styles.articleFt}>
-                <span className={styles.articleCreateAt}>
-                  发布日期： {article.createAt}
-                </span>
-                <span className={styles.categoryList}>
-                  {article.category.map((category) => (
-                    <span key={category.id} className={styles.categoryItem}>
-                      {category.name}
-                    </span>
-                  ))}
-                </span>
-                <a href={`/article/${article.id}`} className={styles.read}>查看全部<span className={`iconfont icon-arrow-right ${styles.iconArrowRight}`}></span></a>
+              <div className={styles.articleInfo}>
+                <a
+                  href={`/article/${article.id}`}
+                  className={`${styles.articleTitle} ellipsis`}
+                >
+                  {article.title}
+                </a>
+                <div className={`${styles.articleIntro} ellipsis`}>
+                  {article.intro}
+                </div>
+                <div className={styles.articleFt}>
+                  <span className={styles.articleCreateAt}>
+                    发布日期： {article.createAt}
+                  </span>
+                  <span className={styles.categoryList}>
+                    {article.category.map((category) => (
+                      <span key={category.id} className={styles.categoryItem}>
+                        {category.name}
+                      </span>
+                    ))}
+                  </span>
+                  <a href={`/article/${article.id}`} className={styles.read}>
+                    查看全部
+                    <span
+                      className={`iconfont icon-arrow-right ${styles.iconArrowRight}`}
+                    />
+                  </a>
+                </div>
               </div>
-            </div>
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))}
+          <Pagination
+            total={total}
+            totalPage={totalPage}
+            current={currentPage}
+            onChange={onPageChange}
+            path={'/'}
+          />
+        </div>
+      )}
     </PageContainer>
   );
 };
