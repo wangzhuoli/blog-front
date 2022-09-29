@@ -10,3 +10,7 @@
 .categoryList a:last-of-type {
   margin-bottom: 0;
 }
+.categoryList a.isActive {
+  background: var(--primary-color);
+  color: #ffffff;
+}

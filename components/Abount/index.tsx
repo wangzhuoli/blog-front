@@ -1,9 +1,24 @@
 import styles from './index.module.css';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Card from '../Card';
+import { getStats } from '../../services/index/index';
+import { GetStatsData } from '../../services/index/index.d';
 
 const About: React.FC<{ className?: string }> = (props) => {
   const { className } = props;
+  const [stats, setStats] = useState<GetStatsData | null>(null);
+
+  useEffect(() => {
+    loadStats();
+  }, []);
+
+  const loadStats = useCallback(async () => {
+    try {
+      const { data } = await getStats();
+      console.log(data);
+      setStats(data);
+    } catch (e) {}
+  }, []);
   return (
     <Card className={`${styles.aboutContainer} ${className}`}>
       <div className={styles.info}>
@@ -13,29 +28,29 @@ const About: React.FC<{ className?: string }> = (props) => {
           }
           className={styles.avatar}
         />
-        <div className={styles.name}>XXX</div>
-        <div className={styles.motto}>学如逆水行舟，不进则退。</div>
+        <div className={styles.name}>鼠突猛进</div>
+        <div className={styles.motto}>好好学习，天天向上。</div>
       </div>
       <div className={styles.statsList}>
         <div className={styles.statsItem}>
           <p className={styles.statsTitle}>文章</p>
-          <p className={styles.statsNum}>18</p>
+          <p className={styles.statsNum}>{stats?.articleCount}</p>
         </div>
         <div className={styles.statsItem}>
-          <p className={styles.statsTitle}>标签</p>
-          <p className={styles.statsNum}>0</p>
+          <p className={styles.statsTitle}>-</p>
+          <p className={styles.statsNum}>-</p>
         </div>
         <div className={styles.statsItem}>
           <p className={styles.statsTitle}>分类</p>
-          <p className={styles.statsNum}>3</p>
+          <p className={styles.statsNum}>{stats?.categoryCount}</p>
         </div>
       </div>
-      <a href={''} className={styles.attention}>
-        <span
-          className={`iconfont icon-favorites-fill ${styles.iconFavorites}`}
-        />
-        收藏
-      </a>
+      {/*<a href={''} className={styles.attention}>*/}
+      {/*  <span*/}
+      {/*    className={`iconfont icon-favorites-fill ${styles.iconFavorites}`}*/}
+      {/*  />*/}
+      {/*  收藏*/}
+      {/*</a>*/}
       <div className={styles.other}>
         <div className={`iconfont icon-wechat- ${styles.iconWeixin}`}>
           <span className={styles.qrcodeContainer}>

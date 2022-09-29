@@ -10,14 +10,20 @@ import Pagination from '../components/Pagination';
 import Result from '../components/Result';
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
+import { getUrlSearchParams } from '../services/request';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { page = 1 } = context.query;
-  const { data } = await getArticleList({ pageSize: 10, current: +page });
+  const { page = 1, categoryId = 0 } = context.query;
+  const { data } = await getArticleList({
+    pageSize: 10,
+    current: +page,
+    categoryId: +categoryId,
+  });
+
   if (!data) {
     return {
       redirect: {
-        destination: '/500',
+        destination: '/404',
         permanent: false,
       },
     };
@@ -28,17 +34,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }));
   return {
     props: {
+      categoryId: +categoryId,
       ...data,
     },
   };
 };
 
-const HomePage: NextPage<PaginationResult<ArticleItem>> = (props) => {
-  const { total, totalPage, list, currentPage = 1 } = props;
+const HomePage: NextPage<
+  PaginationResult<ArticleItem> & { categoryId: number }
+> = (props) => {
+  const { total, totalPage, list, currentPage = 1, categoryId } = props;
   const router = useRouter();
-  const onPageChange = useCallback((page: number) => {
-    router.replace('/', { query: { page } });
-  }, []);
+  const onPageChange = useCallback(
+    (page: number) => {
+      router.replace(getUrlSearchParams('/', { page, categoryId }));
+    },
+    [categoryId],
+  );
   return (
     <PageContainer>
       {list.length === 0 ? (
@@ -79,7 +91,7 @@ const HomePage: NextPage<PaginationResult<ArticleItem>> = (props) => {
                     ))}
                   </span>
                   <a href={`/article/${article.id}`} className={styles.read}>
-                    查看全部
+                    阅读全文
                     <span
                       className={`iconfont icon-arrow-right ${styles.iconArrowRight}`}
                     />

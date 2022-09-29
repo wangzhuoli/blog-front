@@ -17,7 +17,9 @@ const Pagination = (props: PaginationProps) => {
       result.push({ path: `${path}?page=${i}`, page: i });
     }
     // 最多五页
-    result = result.slice(0, 5);
+    const startAt = current - 3 <= 0 ? 0 : current - 3;
+    const endAt = current - 3 <= 0 ? 5 : current + 2;
+    result = result.slice(startAt, endAt);
     return result;
   }, [path, current, totalPage]);
 
@@ -26,7 +28,6 @@ const Pagination = (props: PaginationProps) => {
       if (page === current) {
         return;
       }
-      console.log(page);
       return false;
     },
     [current],
@@ -35,6 +36,20 @@ const Pagination = (props: PaginationProps) => {
     <div className={styles.container}>
       <div className={styles.total}>共 {total}条</div>
       <ul className={styles.list}>
+        {current > 3 ? (
+          <li className={styles.item}>
+            <a
+              href={list[0]?.path}
+              className={`${styles.pageNumber}`}
+              onClick={(e) => {
+                onChange && onChange(1);
+                e.preventDefault();
+              }}
+            >
+              首页
+            </a>
+          </li>
+        ) : null}
         {list.map((i) => (
           <li key={i.path} className={styles.item}>
             <a
@@ -51,6 +66,20 @@ const Pagination = (props: PaginationProps) => {
             </a>
           </li>
         ))}
+        {totalPage - current > 2 ? (
+          <li className={styles.item}>
+            <a
+              href={list[list.length - 1]?.path}
+              className={`${styles.pageNumber}`}
+              onClick={(e) => {
+                onChange && onChange(totalPage);
+                e.preventDefault();
+              }}
+            >
+              尾页
+            </a>
+          </li>
+        ) : null}
       </ul>
     </div>
   );
