@@ -6,12 +6,9 @@
   display: flex;
 }
 
-.articleItem:last-of-type {
-  /*margin-bottom: 0;*/
-}
 .articleThumbWrapper {
   width: 200px;
-  height: 120px;
+  height: 124px;
   margin-right: 10px;
   border-radius: 10px;
   flex: 0 0 200px;
@@ -62,19 +59,7 @@
   margin-right: 20px;
   line-height: 22px;
 }
-.categoryItem {
-  font-size: 12px;
-  color: var(--primary-color);
-  line-height: 22px;
-  padding: 0 6px;
-  background-color: #e6f7ff;
-  border-radius: 4px;
-  border: 1px solid var(--primary-color);
-  margin-right: 6px;
-}
-.categoryItem:last-of-type {
-  margin-right: 0;
-}
+
 .read {
   margin-left: auto;
   font-size: 14px;

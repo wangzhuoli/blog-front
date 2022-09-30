@@ -85,7 +85,7 @@ const HomePage: NextPage<
                   </span>
                   <span className={styles.categoryList}>
                     {article.category.map((category) => (
-                      <span key={category.id} className={styles.categoryItem}>
+                      <span key={category.id} className={'tag'}>
                         {category.name}
                       </span>
                     ))}

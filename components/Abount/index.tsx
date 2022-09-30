@@ -15,7 +15,6 @@ const About: React.FC<{ className?: string }> = (props) => {
   const loadStats = useCallback(async () => {
     try {
       const { data } = await getStats();
-      console.log(data);
       setStats(data);
     } catch (e) {}
   }, []);

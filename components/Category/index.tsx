@@ -33,7 +33,6 @@ const Category: React.FC<{ className?: string }> = (props) => {
         {categoryList.map((category) => (
           <a
             className={currentCategoryId === category.id ? styles.isActive : ''}
-            href={category.path}
             key={category.id}
             onClick={(e) => {
               router.replace(

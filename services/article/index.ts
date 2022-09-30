@@ -15,3 +15,11 @@ export const getArticleList = (
     params,
   });
 };
+
+export const getArticleDetail = (params: {
+  id: number;
+}): Promise<{
+  data: ArticleItem;
+}> => {
+  return serviceRequest(`/front/article/${params.id}`);
+};

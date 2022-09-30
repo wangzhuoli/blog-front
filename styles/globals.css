@@ -39,3 +39,17 @@ a {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
+.tag {
+  font-size: 12px;
+  color: var(--primary-color);
+  display: inline-block;
+  line-height: 22px;
+  padding: 0 6px;
+  background-color: #e6f7ff;
+  border-radius: 4px;
+  border: 1px solid var(--primary-color);
+  margin-right: 6px;
+}
+.tag:last-of-type {
+  margin-right: 0;
+}

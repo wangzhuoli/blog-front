@@ -12,6 +12,7 @@ export interface ArticleItem {
   title: string
   createAt: string
   updateAt: string
+  content: string
   sort: number
   intro: string
   thumbUrl: string

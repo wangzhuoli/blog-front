@@ -1,0 +1,26 @@
+.title {
+  font-size: 24px;
+  line-height: 50px;
+  font-weight: 400;
+  color: var(--font-color-700);
+}
+.head {
+  display: flex;
+  color: var(--font-color-500);
+  font-size: 14px;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.date {
+  line-height: 14px;
+}
+.categoryList {
+  margin-left: 20px;
+}
+.content {
+  font-size: 16px;
+  padding: 14px 0;
+  line-height: 28px;
+  color: var(--font-color-600);
+}
